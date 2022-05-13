@@ -3,7 +3,15 @@ const { ethers } = require("hardhat");
 
 
 async function main() {
-  const CoinFlip = await hre.ethers.getContractFactory("HackGateOne");
+  const GateKeeperOne = await hre.ethers.getContractFactory("GateKeeperOne");
+  const gatekeeperone = await GateKeeperOne.deploy();
+  await gatekeeperone.deployed();
+  console.log("GateKeeperOne deployed to:", gatekeeperone.address);
+
+  const HackGateOne = await hre.ethers.getContractFactory("HackGateOne");
+  const hackgateone = await HackGateOne.deploy(gatekeeperone.address);
+  await hackgateone.deployed();
+  console.log("HackGateOne deployed to:", hackgateone.address);
 
   // const data = [
   //   ethers.utils.formatBytes32String("dai1111111111111111111111111111"),
@@ -11,11 +19,7 @@ async function main() {
   //   ethers.utils.formatBytes32String("dai3333333333333333333333333333")
   // ]
 
-  const coinflip = await CoinFlip.deploy();
 
-  await coinflip.deployed();
-
-  console.log("GateKeeperOne deployed to:", coinflip.address);
 }
 
 main()
