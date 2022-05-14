@@ -3,15 +3,15 @@ const { ethers } = require("hardhat");
 
 
 async function main() {
-  const GateKeeperOne = await hre.ethers.getContractFactory("GateKeeperOne");
-  const gatekeeperone = await GateKeeperOne.deploy();
-  await gatekeeperone.deployed();
-  console.log("GateKeeperOne deployed to:", gatekeeperone.address);
+  // const GateKeeperTwo = await hre.ethers.getContractFactory("GateKeeperTwo");
+  // const gatekeepertwo = await GateKeeperTwo.deploy();
+  // await gatekeepertwo.deployed();
+  // console.log("GateKeeperTwo deployed to:", gatekeepertwo.address);
 
-  const HackGateOne = await hre.ethers.getContractFactory("HackGateOne");
-  const hackgateone = await HackGateOne.deploy(gatekeeperone.address);
-  await hackgateone.deployed();
-  console.log("HackGateOne deployed to:", hackgateone.address);
+  const HackGateTwo = await hre.ethers.getContractFactory("HackGateTwo");
+  const hackgatetwo = await HackGateTwo.deploy("0x7cD1E2d875ff249265D2DC61523e5dF3A8B9671D");
+  await hackgatetwo.deployed();
+  console.log("HackGateTwo deployed to:", hackgatetwo.address);
 
   // const data = [
   //   ethers.utils.formatBytes32String("dai1111111111111111111111111111"),

