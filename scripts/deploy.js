@@ -13,17 +13,17 @@ async function main() {
   // await hackgatetwo.deployed();
   // console.log("HackGateTwo deployed to:", hackgatetwo.address);
 
-  const data = [
-    ethers.utils.formatBytes32String("dai1111111111111111111111111111"),
-    ethers.utils.formatBytes32String("dai2222222222222222222222222222"),
-    ethers.utils.formatBytes32String("dai3333333333333333333333333333")
-  ]
-  console.log(data)
+  // const data = [
+  //   ethers.utils.formatBytes32String("dai1111111111111111111111111111"),
+  //   ethers.utils.formatBytes32String("dai2222222222222222222222222222"),
+  //   ethers.utils.formatBytes32String("dai3333333333333333333333333333")
+  // ]
+  // console.log(data)
 
-  // const HackGateTwo = await hre.ethers.getContractFactory("Solver");
-  // const hackgatetwo = await HackGateTwo.deploy();
-  // await hackgatetwo.deployed();
-  // console.log("HackPreservation deployed to:", hackgatetwo.address);
+  const HackGateTwo = await hre.ethers.getContractFactory("HackShop");
+  const hackgatetwo = await HackGateTwo.deploy("0x44fd327B258d63d6764cBBBA34A827c6Ae331537");
+  await hackgatetwo.deployed();
+  console.log("HackShop deployed to:", hackgatetwo.address);
 
 }
 
